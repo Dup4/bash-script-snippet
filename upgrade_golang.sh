@@ -8,12 +8,12 @@ GO_LATEST_DOWNLOAD_PATH="/tmp/${GO_LATEST_FILENAME}"
 wget --tries=3 "${GO_LATEST_DOWNLOAD_URL}" -O "${GO_LATEST_DOWNLOAD_PATH}"
 
 if [[ -s "${GO_LATEST_DOWNLOAD_PATH}" ]]; then
-  if [[ -d "${GO_INSTALL_PATH}" ]]; then
-      sudo rm -rf "${GO_INSTALL_PATH}"
-  fi
+    if [[ -d "${GO_INSTALL_PATH}" ]]; then
+        sudo rm -rf "${GO_INSTALL_PATH}"
+    fi
 
-  sudo tar -C /usr/local -xzf "${GO_LATEST_DOWNLOAD_PATH}"
-  rm -rf "${GO_LATEST_DOWNLOAD_PATH}"
+    sudo tar -C /usr/local -xzf "${GO_LATEST_DOWNLOAD_PATH}"
+    rm -rf "${GO_LATEST_DOWNLOAD_PATH}"
 
-  go version
+    go version
 fi
