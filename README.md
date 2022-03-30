@@ -3,4 +3,8 @@
 # Bash Script Snippet
 [![Shellcheck](https://github.com/Dup4/bash-script-snippet/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/Dup4/bash-script-snippet/actions/workflows/shellcheck.yml)
 
-Commonly used bash script snippet
+Commonly used bash script snippet.
+
+## License
+
+[MIT](./LICENSE) License © 2021 [Dup4](https://github.com/Dup4)
