@@ -5,6 +5,12 @@
 
 Commonly used bash script snippet.
 
+## Usage
+
+```bash
+bash <(curl -s -L https://cdn.jsdelivr.net/gh/Dup4/bash-script-snippet@latest/${script}.sh) ${your args}
+```
+
 ## License
 
 [MIT](./LICENSE) License © 2021 [Dup4](https://github.com/Dup4)
