@@ -40,7 +40,7 @@ if [[ -z "${DIR}" ]]; then
 fi
 
 if command -v git >/dev/null 2>&1; then
-    pass
+    echo "git found."
 else
     echo "git not found."
     exit 3
