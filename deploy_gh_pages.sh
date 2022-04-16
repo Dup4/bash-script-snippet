@@ -2,14 +2,14 @@
 
 REPO=""
 DIR=""
-TARGET=""
+NAME=""
 BRANCH="deploy-pages"
 
 function usage() {
     echo "usage"
 }
 
-while getopts "b:d:t:r:h:" o; do
+while getopts "b:d:n:t:r:h:" o; do
     case "${o}" in
     b)
         BRANCH=${OPTARG}
@@ -17,8 +17,11 @@ while getopts "b:d:t:r:h:" o; do
     d)
         DIR=${OPTARG}
         ;;
+    n)
+        NAME=${OPTARG}
+        ;;
     t)
-        TARGET=${OPTARG}
+        TOKEN=${OPTARG}
         ;;
     r)
         REPO=${OPTARG}
@@ -46,13 +49,17 @@ else
     exit 3
 fi
 
-if [[ -z "${TARGET}" ]]; then
-    TARGET=${REPO#*/}
+if [[ -z "${NAME}" ]]; then
+    NAME=${REPO#*/}
+fi
+
+if [[ -n "${TOKEN}" ]]; then
+    TOKEN="${TOKEN}@"
 fi
 
 echo "repo: ${REPO}"
 echo "dir: ${DIR}"
-echo "target: ${TARGET}"
+echo "name: ${NAME}"
 echo "branch: ${BRANCH}"
 
 cd "${DIR}" || exit 4
@@ -61,7 +68,7 @@ OK=0
 
 for i in $(seq 5); do
     echo "trying. [number of tries=${i}]"
-    git clone https://github.dup4.com/"${REPO}".git -b "${BRANCH}" --depth=1 "${TARGET}.back"
+    git clone https://"${TOKEN}"github.dup4.com/"${REPO}".git -b "${BRANCH}" --depth=1 "${NAME}.back"
     # shellcheck disable=SC2181
     if [ $? -eq 0 ]; then
         OK=1
@@ -74,8 +81,8 @@ if [ ${OK} -eq 0 ]; then
     exit 5
 fi
 
-if [[ -d "${TARGET}.back" ]]; then
-    rm -rf "${TARGET}" && mv "${TARGET}.back" "${TARGET}"
+if [[ -d "${NAME}.back" ]]; then
+    rm -rf "${NAME}" && mv "${NAME}.back" "${NAME}"
 fi
 
 exit 0
