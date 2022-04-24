@@ -82,7 +82,9 @@ if [ ${OK} -eq 0 ]; then
 fi
 
 if [[ -d "${NAME}.back" ]]; then
-    rm -rf "${NAME}" && mv "${NAME}.back" "${NAME}"
+    mv "${NAME}" "${NAME}.origin.back"
+    mv "${NAME}.back" "${NAME}"
+    rm -rf "${NAME}.origin.back"
 fi
 
 exit 0
