@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # shellcheck disable=SC2044
+# shellcheck disable=SC2002
 for proc in $(find /proc -maxdepth 1 -regex '/proc/[0-9]+'); do
     printf "%2d %5d %s\n" \
         "$(cat "${proc}"/oom_score)" \
