@@ -1,5 +1,7 @@
 #! /bin/bash
 
+# https://github.com/xbin-io/xbin
+
 command="$1"
 args="${*:2}"
 if [ -t 0 ]; then
