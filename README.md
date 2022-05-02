@@ -8,7 +8,17 @@ Commonly used bash script snippet.
 ## Usage
 
 ```bash
+# cdn.jsdelivr.net
 bash <(curl -s -L https://cdn.jsdelivr.net/gh/Dup4/bash-script-snippet@latest/${script}.sh) ${your args}
+
+# raw.github
+bash <(curl -s -L https://raw.githubusercontent.com/Dup4/bash-script-snippet/main/${script}.sh) ${your args}
+
+# You can make a function
+function bs() {
+    script_name="${1}"
+    bash <(curl -s -L https://raw.githubusercontent.com/Dup4/bash-script-snippet/main/${script_name}.sh) "${@:2}"
+}
 ```
 
 ## License
