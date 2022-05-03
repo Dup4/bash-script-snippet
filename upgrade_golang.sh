@@ -1,7 +1,9 @@
 #! /bin/bash
 
+VERSION="1.18"
+
 GO_INSTALL_PATH="/usr/local/go"
-GO_LATEST_FILENAME="go1.18.linux-amd64.tar.gz"
+GO_LATEST_FILENAME="go${VERSION}.linux-amd64.tar.gz"
 GO_LATEST_DOWNLOAD_URL="https://go.dev/dl/${GO_LATEST_FILENAME}"
 GO_LATEST_DOWNLOAD_PATH="/tmp/${GO_LATEST_FILENAME}"
 
