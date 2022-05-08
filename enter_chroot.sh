@@ -5,17 +5,16 @@ set -e
 
 cleanup() {
     # Unmount things on cleanup
-    umount -f "$CHROOTDIR/proc" >/dev/null 2>&1  || /bin/true
-    umount -f "$CHROOTDIR/sys" >/dev/null 2>&1  || /bin/true
-    umount -f "$CHROOTDIR/dev/pts" >/dev/null 2>&1  || /bin/true
+    umount -f "$CHROOTDIR/proc" >/dev/null 2>&1 || /bin/true
+    umount -f "$CHROOTDIR/sys" >/dev/null 2>&1 || /bin/true
+    umount -f "$CHROOTDIR/dev/pts" >/dev/null 2>&1 || /bin/true
 }
 trap cleanup EXIT
 
 # Default directory where the chroot tree lives:
 CHROOTDIR=""
 
-usage()
-{
+usage() {
     cat <<EOF
 Usage: $0 [options]... [command]
 Runs <command> inside the prebuilt chroot environment. If no command is
@@ -40,8 +39,7 @@ into the chroot tree, and then e.g. run:
 EOF
 }
 
-error()
-{
+error() {
     echo "Error: $*"
     echo
     usage
@@ -49,14 +47,14 @@ error()
 }
 
 # Read command-line parameters:
-while getopts 'd:h' OPT ; do
+while getopts 'd:h' OPT; do
     case $OPT in
-        d) CHROOTDIR=$OPTARG ;;
-        h) SHOWHELP=1 ;;
-        \?) error "Could not parse options." ;;
+    d) CHROOTDIR=$OPTARG ;;
+    h) SHOWHELP=1 ;;
+    \?) error "Could not parse options." ;;
     esac
 done
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 if [ -n "$SHOWHELP" ]; then
     usage
