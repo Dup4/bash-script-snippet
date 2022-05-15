@@ -21,5 +21,8 @@ mount -t tmpfs -o size=512M tmpfs "${HOME}"/tmp
 # check if a path is a mount point
 mountpoint "${HOME}"/tmp
 
+# check a path is a tmpfs mount point
+findmnt "${HOME}"/tmp -t tmpfs
+
 # unmount a mountpoint
 umount -v "${HOME}"/tmp
