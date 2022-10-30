@@ -4,12 +4,14 @@ REPO=""
 DIR=""
 NAME=""
 BRANCH="deploy-pages"
+HOST="github.com"
+PROXY=""
 
 function usage() {
     echo "usage"
 }
 
-while getopts "b:d:n:t:r:h:" o; do
+while getopts "b:d:n:t:r:p:h:" o; do
     case "${o}" in
     b)
         BRANCH=${OPTARG}
@@ -25,6 +27,9 @@ while getopts "b:d:n:t:r:h:" o; do
         ;;
     r)
         REPO=${OPTARG}
+        ;;
+    p)
+        PROXY=${OPTARG}
         ;;
     h | *)
         usage
@@ -57,6 +62,10 @@ if [[ -n "${TOKEN}" ]]; then
     TOKEN="${TOKEN}@"
 fi
 
+if [[ -n "${PROXY}" ]]; then
+    HOST="${PROXY}"
+fi
+
 echo "repo: ${REPO}"
 echo "dir: ${DIR}"
 echo "name: ${NAME}"
@@ -74,7 +83,7 @@ fi
 
 for i in $(seq 5); do
     echo "trying. [number of tries=${i}]"
-    git clone https://"${TOKEN}"github.dup4.com/"${REPO}".git -b "${BRANCH}" --depth=1 "${DOWNLOAD_PATH}"
+    git clone https://"${TOKEN}${HOST}"/"${REPO}".git -b "${BRANCH}" --depth=1 "${DOWNLOAD_PATH}"
     # shellcheck disable=SC2181
     if [ $? -eq 0 ]; then
         OK=1
