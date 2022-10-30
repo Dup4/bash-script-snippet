@@ -66,9 +66,15 @@ cd "${DIR}" || exit 4
 
 OK=0
 
+DOWNLOAD_PATH="${NAME}.gh.download"
+
+if [[ -d "${DOWNLOAD_PATH}" ]]; then
+    rm -rf "${DOWNLOAD_PATH}"
+fi
+
 for i in $(seq 5); do
     echo "trying. [number of tries=${i}]"
-    git clone https://"${TOKEN}"github.dup4.com/"${REPO}".git -b "${BRANCH}" --depth=1 "${NAME}.back"
+    git clone https://"${TOKEN}"github.dup4.com/"${REPO}".git -b "${BRANCH}" --depth=1 "${DOWNLOAD_PATH}"
     # shellcheck disable=SC2181
     if [ $? -eq 0 ]; then
         OK=1
@@ -81,10 +87,10 @@ if [ ${OK} -eq 0 ]; then
     exit 5
 fi
 
-if [[ -d "${NAME}.back" ]]; then
-    mv "${NAME}" "${NAME}.origin.back"
-    mv "${NAME}.back" "${NAME}"
-    rm -rf "${NAME}.origin.back"
+if [[ -d "${DOWNLOAD_PATH}" ]]; then
+    mv "${NAME}" "${NAME}.back"
+    mv "${DOWNLOAD_PATH}" "${NAME}"
+    rm -rf "${NAME}.back"
 fi
 
 exit 0
