@@ -1,11 +1,15 @@
 #! /bin/bash
 
+VERSION="0.0.1"
+
 REPO=""
 DIR=""
 NAME=""
 BRANCH="deploy-pages"
 HOST="github.com"
 PROXY=""
+
+echo "Version: ${VERSION}"
 
 function usage() {
     echo "usage"
