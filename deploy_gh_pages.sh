@@ -107,7 +107,7 @@ if [[ "${OK}" -eq 0 ]]; then
     done
 fi
 
-if [ ${OK} -eq 0 ]; then
+if [[ ${OK} -eq 0 ]]; then
     echo "deploy failed."
     exit 5
 fi
