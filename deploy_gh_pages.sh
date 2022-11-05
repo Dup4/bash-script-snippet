@@ -81,31 +81,33 @@ if [[ -d "${DOWNLOAD_PATH}" ]]; then
     rm -rf "${DOWNLOAD_PATH}"
 fi
 
-if [[ -z "${TOKEN}" ]]; then
-    for i in $(seq 5); do
-        echo "trying ssh. [number of tries=${i}]"
-        git clone git@github.com:"${REPO}".git -b "${BRANCH}" --depth=1 "${DOWNLOAD_PATH}"
+function git_clone() {
+    if [[ -z "${TOKEN}" ]]; then
+        for i in $(seq 5); do
+            echo "trying ssh. [number of tries=${i}]"
+            git clone git@github.com:"${REPO}".git -b "${BRANCH}" --depth=1 "${DOWNLOAD_PATH}"
 
-        # shellcheck disable=SC2181
-        if [[ $? -eq 0 ]]; then
-            OK=1
-            break
-        fi
-    done
-fi
+            # shellcheck disable=SC2181
+            if [[ $? -eq 0 ]]; then
+                OK=1
+                return
+            fi
+        done
+    fi
 
-if [[ "${OK}" -eq 0 ]]; then
     for i in $(seq 5); do
-        echo "trying. [number of tries=${i}]"
+        echo "trying https. [number of tries=${i}]"
         git clone https://"${TOKEN}${HOST}"/"${REPO}".git -b "${BRANCH}" --depth=1 "${DOWNLOAD_PATH}"
 
         # shellcheck disable=SC2181
         if [[ $? -eq 0 ]]; then
             OK=1
-            break
+            return
         fi
     done
-fi
+}
+
+git_clone
 
 if [[ ${OK} -eq 0 ]]; then
     echo "deploy failed."
