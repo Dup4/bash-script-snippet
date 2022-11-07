@@ -87,21 +87,29 @@ fi
 
 function git_clone() {
     if [[ -z "${TOKEN}" ]]; then
-        for i in $(seq 5); do
-            echo "trying ssh. [number of tries=${i}]"
-            git clone git@github.com:"${REPO}".git -b "${BRANCH}" --depth=1 "${DOWNLOAD_PATH}"
+        local host_list
+        host_list=(
+            "git@github.com"
+            "git@ssh.github.com"
+        )
 
-            # shellcheck disable=SC2181
-            if [[ $? -eq 0 ]]; then
-                OK=1
-                return
-            fi
+        for host in "${host_list[@]}"; do
+            for i in $(seq 5); do
+                echo "trying ssh. [host=${host}] [number of tries]"
+                git clone "${host}":"${REPO}".git -b "${BRANCH}" --single-branch --depth=1 "${DOWNLOAD_PATH}"
+
+                # shellcheck disable=SC2181
+                if [[ $? -eq 0 ]]; then
+                    OK=1
+                    return
+                fi
+            done
         done
     fi
 
     for i in $(seq 5); do
         echo "trying https. [number of tries=${i}]"
-        git clone https://"${TOKEN}${HOST}"/"${REPO}".git -b "${BRANCH}" --depth=1 "${DOWNLOAD_PATH}"
+        git clone https://"${TOKEN}${HOST}"/"${REPO}".git -b "${BRANCH}" --single-branch --depth=1 "${DOWNLOAD_PATH}"
 
         # shellcheck disable=SC2181
         if [[ $? -eq 0 ]]; then
