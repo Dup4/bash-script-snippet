@@ -1,4 +1,5 @@
 #! /bin/sh
+# shellcheck disable=SC2317
 
 # Abort when a single command fails:
 set -e
