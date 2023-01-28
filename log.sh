@@ -7,11 +7,11 @@ function get_now_time() {
 }
 
 function INFO() {
-    echo -e "\033[0;32m$(get_now_time) [INFO]: $*\033[0m"
+    echo -e "\033[0;32m$(get_now_time) [INFO] [${FUNCNAME[1]}]: $*\033[0m"
 }
 
 function ERROR() {
-    echo -e "\033[0;31m$(get_now_time) [ERROR]: $*\033[0m"
+    echo -e "\033[0;31m$(get_now_time) [ERROR] [${FUNCNAME[1]}]: $*\033[0m"
 }
 
 # the following code is the test code
