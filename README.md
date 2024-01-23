@@ -23,4 +23,7 @@ function bs() {
 
 ## License
 
-[MIT](./LICENSE) License © 2021 [Dup4](https://github.com/Dup4)
+[MIT](./LICENSE) License © 2021 - PRESENT [Dup4][dup4]
+
+
+[dup4]: https://github.com/Dup4
