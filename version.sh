@@ -1,3 +1,3 @@
 #! /bin/bash
 
-export VERSION="v0.0.3"
+export VERSION="v0.0.4"

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-VERSION="v0.0.3"
+VERSION="v0.0.4"
 
 GO_INSTALL_PATH="/usr/local/go"
 GO_LATEST_FILENAME="go${VERSION}.linux-amd64.tar.gz"
