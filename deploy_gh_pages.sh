@@ -86,7 +86,7 @@ if [[ -d "${DOWNLOAD_PATH}" ]]; then
 fi
 
 function git_clone() {
-    if [[ -n "${PROXY}" ]]; then
+    if [[ -n "${PROXY}" ]] || [[ -n "${TOKEN}" ]]; then
         for i in $(seq 5); do
             echo "trying https. [number of tries=${i}]"
             git clone https://"${TOKEN}${HOST}"/"${REPO}".git \
