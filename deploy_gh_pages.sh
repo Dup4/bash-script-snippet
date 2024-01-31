@@ -1,6 +1,6 @@
 #! /bin/bash
 
-VERSION="v0.0.4"
+VERSION="v0.0.5"
 
 REPO=""
 DIR=""

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-export VERSION=v0.0.4
+export VERSION=v0.0.5
 
 find . -name "*.sh" -exec sed -i '' "s/VERSION=\".*\"/VERSION=\"${VERSION}\"/g" {} \;
 
